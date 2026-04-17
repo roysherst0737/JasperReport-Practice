@@ -1,34 +1,97 @@
 # JasperReports CSV → PDF Demo
 
-## Run
-- Run `RunReport.java`
-- Output: C:/jasperResults/KH_HouseSales_11501.pdf
+## Overview
+This project demonstrates how to:
+- Design reports using Jaspersoft Studio (.jrxml)
+- Load CSV data via Java
+- Pass parameters (e.g., logo image)
+- Export report to PDF
+
+---
+
+## How to Run
+1. Build project (Maven)
+2. Run:
+   RunReport.java
+
+3. Output:
+   C:/jasperResults/KH_HouseSales_11501.pdf
+
+---
 
 ## Open in Jaspersoft Studio
-- File → Open File → reports/KH_HouseSales_11501.jrxml
-- 或 File → Import → General → File System
 
-## Logo 設定
-jrxml:
+This is a Maven/IntelliJ project (NOT Eclipse project)
+
+### Method 1 (Recommended)
+File → Open File  
+→ src/main/resources/reports/KH_HouseSales_11501.jrxml
+
+### Method 2
+File → Import → General → File System  
+→ Select project root
+
+### Method 3 (Advanced)
+File → Import → Maven → Existing Maven Projects
+
+---
+
+## Project Structure
+
+src/main/resources/
+- reports/  → jrxml files
+- data/     → CSV data
+- images/   → logo/image files
+- fonts/    → font files
+- jasperreports_extension.properties
+
+---
+
+## Logo Handling (Important)
+
+### jrxml
 <imageExpression>
 $P{LOGO_STREAM} != null ? $P{LOGO_STREAM} : $P{LOGO_PATH}
 </imageExpression>
 
-Java:
+### Java (runtime)
 params.put("LOGO_STREAM", classpath image stream)
 
-## 修改圖片路徑（Studio Preview 用）
-LOGO_PATH 要改成本機實際路徑，例如：
-C:/your_path/src/main/resources/images/Emblem_of_Kaohsiung_City.png
+---
 
-## 結構
-src/main/resources/
-- reports/
-- data/
-- images/
-- fonts/
+## Image Path for Studio Preview
 
-## 重點
-Studio 用 LOGO_PATH  
-Java 用 LOGO_STREAM  
-同一份 jrxml 共用
+Jaspersoft Studio does NOT always load classpath resources  
+→ You must set a local fallback path
+
+### Example
+LOGO_PATH:
+C:/your_project_path/src/main/resources/images/Emblem_of_Kaohsiung_City.png
+
+⚠️ You must change this to your local machine path
+
+---
+
+## Behavior
+
+| Environment       | Image Source   |
+|------------------|---------------|
+| Java runtime     | LOGO_STREAM   |
+| Studio Preview   | LOGO_PATH     |
+
+---
+
+## Notes
+
+- CSV must be UTF-8
+- First row must be header
+- Field names must match jrxml fields
+- Fonts must be configured for Chinese support (if needed)
+
+---
+
+## Key Concept
+
+Studio uses local path  
+Java uses classpath  
+→ One jrxml works in both environments
