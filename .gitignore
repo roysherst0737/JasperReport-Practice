@@ -1,0 +1,66 @@
+
+---
+
+# 📦 .gitignore（Jasper + IntelliJ + Maven 完整版）
+
+```gitignore
+# ========================
+# IntelliJ
+# ========================
+.idea/
+*.iml
+
+# ========================
+# Maven
+# ========================
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+
+# ========================
+# OS
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Logs
+# ========================
+*.log
+
+# ========================
+# JasperReports
+# ========================
+*.jasper
+
+# ========================
+# Temp / cache
+# ========================
+*.tmp
+*.temp
+*.cache
+
+# ========================
+# Output PDF (不要上傳產物)
+# ========================
+*.pdf
+jasperResults/
+
+# ========================
+# Eclipse / Jaspersoft Studio
+# ========================
+.project
+.classpath
+.settings/
+
+# ========================
+# VSCode
+# ========================
+.vscode/
+
+# ========================
+# Fonts（如果你不想上傳字型）
+# ========================
+# src/main/resources/fonts/*.ttf

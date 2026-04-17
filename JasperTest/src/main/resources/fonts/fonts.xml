@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+    <fontFamily name="Kaiu">
+        <normal>fonts/kaiu.ttf</normal>
+        <bold>fonts/kaiu.ttf</bold>
+        <italic>fonts/kaiu.ttf</italic>
+        <boldItalic>fonts/kaiu.ttf</boldItalic>
+        <pdfEncoding>Identity-H</pdfEncoding>
+        <pdfEmbedded>true</pdfEmbedded>
+    </fontFamily>
+</fontFamilies>
