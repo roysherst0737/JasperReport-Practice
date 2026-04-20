@@ -64,3 +64,37 @@ jasperResults/
 # Fonts（如果你不想上傳字型）
 # ========================
 # src/main/resources/fonts/*.ttf
+
+# ========================
+# Vue / Vite
+# ========================
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# ========================
+# Env files（敏感資訊）
+# ========================
+.env
+.env.*
+!.env.example
+
+# ========================
+# Vite cache
+# ========================
+.vite/
+
+# ========================
+# Logs（Node）
+# ========================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ========================
+# IDE（前端常見）
+# ========================
+*.swp
+*.swo

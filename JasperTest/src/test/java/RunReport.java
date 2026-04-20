@@ -1,5 +1,3 @@
-package org.jaspertest;
-
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRCsvDataSource;
 

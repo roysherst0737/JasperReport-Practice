@@ -1,97 +1,130 @@
 # JasperReports CSV → PDF Demo
 
 ## Overview
-This project demonstrates how to:
-- Design reports using Jaspersoft Studio (.jrxml)
-- Load CSV data via Java
-- Pass parameters (e.g., logo image)
-- Export report to PDF
+Full-stack demo:
+CSV → Spring Boot → Jasper → PDF  
+Vue frontend for upload & download
 
 ---
 
-## How to Run
-1. Build project (Maven)
-2. Run:
-   RunReport.java
+## Features
 
-3. Output:
-   C:/jasperResults/KH_HouseSales_11501.pdf
+### Backend
+- CSV upload
+- Flexible parsing (order / alias / BOM)
+- Data cleaning:
+  - 100.00 → 100
+  - $100 / 100筆 → 100
+  - empty → 0
+- Skip invalid rows
+- Bean DataSource
+- PDF export
 
----
+### Frontend
+- Upload CSV
+- Call API
+- Auto download PDF
 
-## Open in Jaspersoft Studio
-
-This is a Maven/IntelliJ project (NOT Eclipse project)
-
-### Method 1 (Recommended)
-File → Open File  
-→ src/main/resources/reports/KH_HouseSales_11501.jrxml
-
-### Method 2
-File → Import → General → File System  
-→ Select project root
-
-### Method 3 (Advanced)
-File → Import → Maven → Existing Maven Projects
-
----
-
-## Project Structure
-
-src/main/resources/
-- reports/  → jrxml files
-- data/     → CSV data
-- images/   → logo/image files
-- fonts/    → font files
-- jasperreports_extension.properties
+### Jasper
+- .jrxml template
+- Bean binding
+- Chinese support
+- Logo parameter
 
 ---
 
-## Logo Handling (Important)
+## Run
 
-### jrxml
-<imageExpression>
+### Backend
+```
+cd backend
+mvn spring-boot:run
+```
+
+### Frontend
+```
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend:
+```
+http://localhost:5173
+```
+
+---
+
+## Usage
+1. Open frontend
+2. Upload CSV
+3. Click button
+4. Download PDF
+
+---
+
+## CSV
+
+Required fields (flexible):
+
+| Field | Names |
+|------|------|
+| district | 區名 / 行政區 |
+| itemCount | 件數 / 交易件數 |
+| landCount | 土地筆數 |
+| buildingCount | 建物棟數 |
+
+Example:
+```
+區名,件數,土地筆數,建物棟數
+三民區,100.00,200,50
+左營區,$80,150筆,40棟
+```
+
+---
+
+## Logo
+
+jrxml:
+```
 $P{LOGO_STREAM} != null ? $P{LOGO_STREAM} : $P{LOGO_PATH}
-</imageExpression>
+```
 
-### Java (runtime)
-params.put("LOGO_STREAM", classpath image stream)
+Runtime:
+- uses LOGO_STREAM
 
----
-
-## Image Path for Studio Preview
-
-Jaspersoft Studio does NOT always load classpath resources  
-→ You must set a local fallback path
-
-### Example
-LOGO_PATH:
-C:/your_project_path/src/main/resources/images/Emblem_of_Kaohsiung_City.png
-
-⚠️ You must change this to your local machine path
-
----
-
-## Behavior
-
-| Environment       | Image Source   |
-|------------------|---------------|
-| Java runtime     | LOGO_STREAM   |
-| Studio Preview   | LOGO_PATH     |
+Studio:
+- must set local path:
+```
+C:/your_project_path/.../images/xxx.png
+```
 
 ---
 
 ## Notes
-
 - CSV must be UTF-8
-- First row must be header
-- Field names must match jrxml fields
-- Fonts must be configured for Chinese support (if needed)
+- First row = header
+- Studio uses local path
+- Java uses classpath
 
 ---
 
-## Key Concept
+## Flow
+```
+CSV → Java → Jasper → PDF
+```
 
-Studio uses local path  
-Java uses classpath  
-→ One jrxml works in both environments
+---
+
+## Summary
+- Clean data before Jasper
+- Flexible CSV support
+- Same jrxml for Studio + runtime
+
+---
+
+## Future
+- CSV preview
+- Column mapping UI
+- Excel support
+- Multi-template
